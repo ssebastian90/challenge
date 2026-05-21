@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Provocările Tale din China 🐉</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #C0392B;
+    --gold: #D4A017;
+    --gold-light: #F5D76E;
+    --ink: #1A1008;
+    --cream: #FBF5E6;
+    --paper: #F2E8D0;
+    --shadow: #8B6914;
+    --done: #2E7D32;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background-color: var(--ink);
+    background-image:
+      radial-gradient(ellipse at 20% 10%, rgba(192,57,43,0.15) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 90%, rgba(212,160,23,0.12) 0%, transparent 50%);
+    font-family: 'DM Sans', sans-serif;
+    color: var(--ink);
+    min-height: 100vh;
+    padding: 20px;
+  }
+
+  /* Lantern decorations */
+  .lanterns {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: -10px;
+    animation: sway 4s ease-in-out infinite;
+  }
+  .lantern {
+    width: 22px; height: 30px;
+    background: var(--red);
+    border-radius: 50% 50% 40% 40%;
+    position: relative;
+    box-shadow: 0 0 12px rgba(192,57,43,0.7), inset 0 0 8px rgba(255,200,0,0.3);
+  }
+  .lantern::before {
+    content: '';
+    position: absolute;
+    top: -5px; left: 50%; transform: translateX(-50%);
+    width: 3px; height: 8px;
+    background: var(--gold);
+  }
+  .lantern::after {
+    content: '';
+    position: absolute;
+    bottom: -8px; left: 50%; transform: translateX(-50%);
+    width: 2px; height: 10px;
+    background: var(--gold);
+  }
+  @keyframes sway {
+    0%, 100% { transform: rotate(-2deg); }
+    50% { transform: rotate(2deg); }
+  }
+
+  .wrapper {
+    max-width: 760px;
+    margin: 0 auto;
+  }
+
+  header {
+    text-align: center;
+    background: var(--cream);
+    border: 3px solid var(--gold);
+    border-radius: 4px;
+    padding: 30px 20px 20px;
+    margin-bottom: 24px;
+    position: relative;
+    box-shadow: 6px 6px 0 var(--shadow), 0 0 30px rgba(212,160,23,0.2);
+  }
+  header::before, header::after {
+    content: '❋';
+    position: absolute;
+    top: 12px;
+    color: var(--gold);
+    font-size: 18px;
+  }
+  header::before { left: 18px; }
+  header::after { right: 18px; }
+
+  .title-sub {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 8px;
+  }
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(26px, 5vw, 40px);
+    color: var(--ink);
+    line-height: 1.2;
+    margin-bottom: 6px;
+  }
+  .heart { color: var(--red); }
+  .subtitle {
+    font-size: 13px;
+    color: #6B4F1A;
+    font-style: italic;
+  }
+
+  /* Score bar */
+  .scoreboard {
+    background: var(--ink);
+    border: 2px solid var(--gold);
+    border-radius: 4px;
+    padding: 16px 20px;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    box-shadow: 4px 4px 0 rgba(212,160,23,0.3);
+  }
+  .score-label {
+    color: var(--gold);
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .score-bar-wrap {
+    flex: 1;
+    height: 12px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .score-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--red), var(--gold));
+    border-radius: 6px;
+    transition: width 0.6s cubic-bezier(.4,0,.2,1);
+    width: 0%;
+  }
+  .score-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    color: var(--gold-light);
+    white-space: nowrap;
+  }
+  .reward-hint {
+    font-size: 11px;
+    color: rgba(245,215,110,0.6);
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  /* Reward banner */
+  .reward-banner {
+    display: none;
+    background: linear-gradient(135deg, var(--red), #8B0000);
+    border: 2px solid var(--gold);
+    border-radius: 4px;
+    padding: 18px 24px;
+    margin-bottom: 24px;
+    text-align: center;
+    box-shadow: 4px 4px 0 var(--gold);
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+  .reward-banner.show { display: block; }
+  @keyframes pulse-glow {
+    0%, 100% { box-shadow: 4px 4px 0 var(--gold), 0 0 20px rgba(212,160,23,0.3); }
+    50% { box-shadow: 4px 4px 0 var(--gold), 0 0 40px rgba(212,160,23,0.6); }
+  }
+  .reward-banner h2 {
+    font-family: 'Playfair Display', serif;
+    color: var(--gold-light);
+    font-size: 22px;
+    margin-bottom: 6px;
+  }
+  .reward-banner p { color: rgba(255,255,255,0.85); font-size: 14px; }
+
+  /* Challenge cards */
+  .challenges-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+
+  .challenge-card {
+    background: var(--paper);
+    border: 2px solid var(--gold);
+    border-radius: 3px;
+    padding: 16px;
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.15s, box-shadow 0.15s;
+    box-shadow: 3px 3px 0 var(--shadow);
+    user-select: none;
+  }
+  .challenge-card:hover {
+    transform: translate(-1px, -1px);
+    box-shadow: 4px 4px 0 var(--shadow);
+  }
+  .challenge-card.done {
+    background: #E8F5E9;
+    border-color: var(--done);
+    box-shadow: 3px 3px 0 #1B5E20;
+  }
+  .challenge-card.done .challenge-points {
+    color: var(--done);
+  }
+
+  .challenge-icon { font-size: 26px; margin-bottom: 8px; display: block; }
+  .challenge-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    color: var(--ink);
+    margin-bottom: 5px;
+    line-height: 1.3;
+  }
+  .challenge-desc {
+    font-size: 12px;
+    color: #5C4010;
+    line-height: 1.5;
+    margin-bottom: 10px;
+  }
+  .challenge-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .challenge-points {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    color: var(--red);
+    text-transform: uppercase;
+  }
+  .check-btn {
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    border: 2px solid currentColor;
+    background: transparent;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px;
+    color: #9E7A20;
+    transition: all 0.2s;
+    flex-shrink: 0;
+  }
+  .challenge-card.done .check-btn {
+    background: var(--done);
+    border-color: var(--done);
+    color: white;
+  }
+  .done-stamp {
+    position: absolute;
+    top: 10px; right: 10px;
+    font-size: 28px;
+    opacity: 0;
+    transform: rotate(15deg) scale(0.5);
+    transition: all 0.3s cubic-bezier(.17,.67,.41,1.4);
+    pointer-events: none;
+  }
+  .challenge-card.done .done-stamp {
+    opacity: 0.25;
+    transform: rotate(15deg) scale(1);
+  }
+
+  /* Instructions */
+  .instructions {
+    background: var(--cream);
+    border-left: 4px solid var(--red);
+    padding: 16px 20px;
+    margin-bottom: 24px;
+    border-radius: 0 3px 3px 0;
+    font-size: 13px;
+    color: #5C3A10;
+    line-height: 1.7;
+  }
+  .instructions strong { color: var(--red); }
+
+  footer {
+    text-align: center;
+    color: rgba(245,215,110,0.4);
+    font-size: 12px;
+    padding: 20px 0 10px;
+    letter-spacing: 1px;
+  }
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <div class="lanterns">
+    <div class="lantern"></div>
+    <div class="lantern"></div>
+    <div class="lantern"></div>
+    <div class="lantern"></div>
+    <div class="lantern"></div>
+  </div>
+
+  <header>
+    <div class="title-sub">O Misiune de Dragoste de Acasă</div>
+    <h1>Aventura Ta în China <span class="heart">❤</span></h1>
+    <div class="subtitle">Completează provocările și trimite-mi dovada(poza) — te urmăresc de departe!</div>
+  </header>
+
+  <div class="instructions">
+    <strong>Cum funcționează:</strong> Bifează o provocare când o completezi și trimite-mi fotografia! Fiecare provocare valorează puncte.
+    Completează suficiente și vei debloca recompensa când ajungi acasă 😉
+  </div>
+
+  <div class="scoreboard">
+    <div>
+      <div class="score-label">Scorul Tău</div>
+      <div class="score-num" id="scoreNum">0 pts</div>
+    </div>
+    <div style="flex:1">
+      <div class="score-bar-wrap"><div class="score-bar-fill" id="scoreBar"></div></div>
+      <div class="reward-hint" id="rewardHint">Completează 7 provocări pentru a-ți debloca recompensa 🎁</div>
+    </div>
+  </div>
+
+  <div class="reward-banner" id="rewardBanner">
+    <h2>🏆 Recompensă Deblocată! 🏆</h2>
+    <p>Ai reușit, aventurierul meu! Ceva special te așteaptă acasă… 😘</p>
+  </div>
+
+  <div class="challenges-grid" id="grid-all">
+
+    <div class="challenge-card" data-pts="10" onclick="toggle(this)">
+      <div class="done-stamp">✅</div>
+      <span class="challenge-icon">🌶️</span>
+      <div class="challenge-title">Mănâncă Cel Mai Picant Hot Pot</div>
+      <div class="challenge-desc">Comandă cel mai picant hot pot din Chongqing pe care îl găsești. Filmează-ți reacția!</div>
+      <div class="challenge-footer">
+        <span class="challenge-points">10 pts</span>
+        <button class="check-btn">✓</button>
+      </div>
+    </div>
+
+    <div class="challenge-card" data-pts="15" onclick="toggle(this)">
+      <div class="done-stamp">✅</div>
+      <span class="challenge-icon">🚡</span>
+      <div class="challenge-title">Mergi cu Monorailul Prin Clădire</div>
+      <div class="challenge-desc">Urcă în trenul celebru de la stația Liziba care trece printr-un bloc de apartamente. Trimite fotografia!</div>
+      <div class="challenge-footer">
+        <span class="challenge-points">15 pts</span>
+        <button class="check-btn">✓</button>
+      </div>
+    </div>
+
+    <div class="challenge-card" data-pts="10" onclick="toggle(this)">
+      <div class="done-stamp">✅</div>
+      <span class="challenge-icon">🌃</span>
+      <div class="challenge-title">Fotografie cu Skyline-ul Nocturn</div>
+      <div class="challenge-desc">Găsește cea mai bună vedere nocturnă a skyline-ului din Chongqing — puncte bonus pentru o poză dramatică!</div>
+      <div class="challenge-footer">
+        <span class="challenge-points">10 pts</span>
+        <button class="check-btn">✓</button>
+      </div>
+    </div>
+
+    <div class="challenge-card" data-pts="20" onclick="toggle(this)">
+      <div class="done-stamp">✅</div>
+      <span class="challenge-icon">🗺️</span>
+      <div class="challenge-title">Pierde-te Intenționat</div>
+      <div class="challenge-desc">Plimbă-te prin Hongyadong sau o alee veche fără hartă timp de 20 min. Trimite-mi cel mai interesant lucru găsit.</div>
+      <div class="challenge-footer">
+        <span class="challenge-points">20 pts</span>
+        <button class="check-btn">✓</button>
+      </div>
+    </div>
+
+    <div class="challenge-card" data-pts="10" onclick="toggle(this)">
+      <div class="done-stamp">✅</div>
+      <span class="challenge-icon">🥟</span>
+      <div class="challenge-title">Comandă Oarbă de Street Food</div>
+      <div class="challenge-desc">Arată cu degetul ceva ce nu ai mai mâncat niciodată și comandă-l. Dovadă foto obligatorie!</div>
+      <div class="challenge-footer">
+        <span class="challenge-points">10 pts</span>
+        <button class="check-btn">✓</button>
+      </div>
+    </div>
+
+    <div class="challenge-card" data-pts="15" onclick="toggle(this)">
+      <div class="done-stamp">✅</div>
+      <span class="challenge-icon">🪨</span>
+      <div class="challenge-title">Găsește-ți Muntele Plutitor</div>
+      <div class="challenge-desc">Stai unde un pilon pare că plutește deasupra ta și recreează atmosfera Avatar. Fotografie epică!</div>
+      <div class="challenge-footer">
+        <span class="challenge-points">15 pts</span>
+        <button class="check-btn">✓</button>
+      </div>
+    </div>
+
+    <div class="challenge-card" data-pts="20" onclick="toggle(this)">
+      <div class="done-stamp">✅</div>
+      <span class="challenge-icon">🌁</span>
+      <div class="challenge-title">Traversează Podul de Sticlă</div>
+      <div class="challenge-desc">Traversează o pasarelă sau pod de sticlă și trimite-mi fața ta speriată/curajoasă!</div>
+      <div class="challenge-footer">
+        <span class="challenge-points">20 pts</span>
+        <button class="check-btn">✓</button>
+      </div>
+    </div>
+
+    <div class="challenge-card" data-pts="10" onclick="toggle(this)">
+      <div class="done-stamp">✅</div>
+      <span class="challenge-icon">🌄</span>
+      <div class="challenge-title">Vedere la Răsărit sau Apus</div>
+      <div class="challenge-desc">Trezește-te devreme (sau stai până târziu) pentru a surprinde ora de aur deasupra vârfurilor. Trimite cea mai frumoasă fotografie.</div>
+      <div class="challenge-footer">
+        <span class="challenge-points">10 pts</span>
+        <button class="check-btn">✓</button>
+      </div>
+    </div>
+
+    <div class="challenge-card" data-pts="15" onclick="toggle(this)">
+      <div class="done-stamp">✅</div>
+      <span class="challenge-icon">🌿</span>
+      <div class="challenge-title">Atinge un Copac de 100 de Ani</div>
+      <div class="challenge-desc">Găsește un copac bătrân, pune ambele mâini pe el, închide ochii. Exprimă o dorință. Fotografie cu tine făcând asta!</div>
+      <div class="challenge-footer">
+        <span class="challenge-points">15 pts</span>
+        <button class="check-btn">✓</button>
+      </div>
+    </div>
+
+    <div class="challenge-card" data-pts="25" onclick="toggle(this)">
+      <div class="done-stamp">✅</div>
+      <span class="challenge-icon">🎋</span>
+      <div class="challenge-title">Un Minut de Tăcere Totală</div>
+      <div class="challenge-desc">Găsește un loc liniștit în pădure, stai nemișcat 1 minut întreg în natură. Filmează peisajul (nu pe tine!) și trimite-l.</div>
+      <div class="challenge-footer">
+        <span class="challenge-points">25 pts</span>
+        <button class="check-btn">✓</button>
+      </div>
+    </div>
+
+    <div class="challenge-card" data-pts="10" onclick="toggle(this)">
+      <div class="done-stamp">✅</div>
+      <span class="challenge-icon">🌆</span>
+      <div class="challenge-title">Bund-ul la Ora de Aur</div>
+      <div class="challenge-desc">Stai pe Bund cu skyline-ul Pudong în spatele tău. Pozează ca un star de film. Obligatoriu!</div>
+      <div class="challenge-footer">
+        <span class="challenge-points">10 pts</span>
+        <button class="check-btn">✓</button>
+      </div>
+    </div>
+
+    <div class="challenge-card" data-pts="15" onclick="toggle(this)">
+      <div class="done-stamp">✅</div>
+      <span class="challenge-icon">🍜</span>
+      <div class="challenge-title">Provocarea Xiaolongbao</div>
+      <div class="challenge-desc">Mănâncă găluște cu supă la un restaurant local (nu turistic). Acordă-le o notă din 10 în descrierea fotografiei!</div>
+      <div class="challenge-footer">
+        <span class="challenge-points">15 pts</span>
+        <button class="check-btn">✓</button>
+      </div>
+    </div>
+
+    <div class="challenge-card" data-pts="15" onclick="toggle(this)">
+      <div class="done-stamp">✅</div>
+      <span class="challenge-icon">🛍️</span>
+      <div class="challenge-title">Cumpără Ceva Sub ¥20</div>
+      <div class="challenge-desc">Găsește o piață mică sau un vânzător stradal și cumpără-mi un suvenir sub 20 de yuani. Arată-mi ce este!</div>
+      <div class="challenge-footer">
+        <span class="challenge-points">15 pts</span>
+        <button class="check-btn">✓</button>
+      </div>
+    </div>
+
+    <div class="challenge-card" data-pts="20" onclick="toggle(this)">
+      <div class="done-stamp">✅</div>
+      <span class="challenge-icon">🌸</span>
+      <div class="challenge-title">Descoperă o Grădină Ascunsă</div>
+      <div class="challenge-desc">Descoperă o curte liniștită, grădină sau templu departe de mulțimi. Trimite o fotografie liniștitoare și spune-mi cum te-ai simțit.</div>
+      <div class="challenge-footer">
+        <span class="challenge-points">20 pts</span>
+        <button class="check-btn">✓</button>
+      </div>
+    </div>
+
+    <div class="challenge-card" data-pts="10" onclick="toggle(this)">
+      <div class="done-stamp">✅</div>
+      <span class="challenge-icon">🤝</span>
+      <div class="challenge-title">Vorbește cu un Local</div>
+      <div class="challenge-desc">Începe o conversație cu un local (folosește Google Translate dacă e nevoie). Cere-i recomandarea lui preferată de mâncare. Fotografie împreună!</div>
+      <div class="challenge-footer">
+        <span class="challenge-points">10 pts</span>
+        <button class="check-btn">✓</button>
+      </div>
+    </div>
+
+    <div class="challenge-card" data-pts="30" onclick="toggle(this)">
+      <div class="done-stamp">✅</div>
+      <span class="challenge-icon">💌</span>
+      <div class="challenge-title">Trimite-mi un Mesaj Vocal de Dragoste</div>
+      <div class="challenge-desc">Din un loc frumos, înregistrează un mesaj vocal de 30 de secunde spunându-mi un lucru pentru care ești recunoscător în această călătorie.</div>
+      <div class="challenge-footer">
+        <span class="challenge-points">30 pts</span>
+        <button class="check-btn">✓</button>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>Făcut cu ❤ de acasă — Abia aștept să-mi spui toate poveștile 🐉</footer>
+
+</div>
+
+<script>
+  const REWARD_THRESHOLD = 7;
+  const MAX_PTS = 210;
+
+  function toggle(card) {
+    card.classList.toggle('done');
+    updateScore();
+  }
+
+  function updateScore() {
+    const doneCards = document.querySelectorAll('.challenge-card.done');
+    let totalPts = 0;
+    doneCards.forEach(c => totalPts += parseInt(c.dataset.pts));
+
+    document.getElementById('scoreNum').textContent = totalPts + ' pts';
+    const pct = Math.min(100, (totalPts / MAX_PTS) * 100);
+    document.getElementById('scoreBar').style.width = pct + '%';
+
+    const doneCount = doneCards.length;
+    const remaining = Math.max(0, REWARD_THRESHOLD - doneCount);
+    if (remaining === 0) {
+      document.getElementById('rewardBanner').classList.add('show');
+      document.getElementById('rewardHint').textContent = '🎁 Recompensă deblocată! Ne vedem curând 😘';
+    } else {
+      document.getElementById('rewardBanner').classList.remove('show');
+      document.getElementById('rewardHint').textContent = `Mai completează ${remaining} provocări ${remaining > 1 ? '' : ''} pentru a-ți debloca recompensa 🎁`;
+    }
+  }
+
+  updateScore();
+</script>
+</body>
+</html>
