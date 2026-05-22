@@ -370,7 +370,7 @@
 
 
 
-    <div class="challenge-card" data-pts="10" onclick="toggle(this)">
+    <div class="challenge-card" data-pts="15" onclick="toggle(this)">
       <div class="done-stamp">✅</div>
       <span class="challenge-icon">🌄</span>
       <div class="challenge-title">Vedere la Răsărit sau Apus</div>
@@ -427,7 +427,7 @@
       </div>
     </div>
 
-    <div class="challenge-card" data-pts="20" onclick="toggle(this)">
+    <div class="challenge-card" data-pts="15" onclick="toggle(this)">
       <div class="done-stamp">✅</div>
       <span class="challenge-icon">🌸</span>
       <div class="challenge-title">Descoperă o Grădină Ascunsă</div>
@@ -438,7 +438,7 @@
       </div>
     </div>
 
-    <div class="challenge-card" data-pts="10" onclick="toggle(this)">
+    <div class="challenge-card" data-pts="30" onclick="toggle(this)">
       <div class="done-stamp">✅</div>
       <span class="challenge-icon">🤳👲</span>
       <div class="challenge-title">Selfie cu un Localnic</div>
@@ -449,7 +449,7 @@
       </div>
     </div>
 
-    <div class="challenge-card" data-pts="30" onclick="toggle(this)">
+    <div class="challenge-card" data-pts="25" onclick="toggle(this)">
       <div class="done-stamp">✅</div>
       <span class="challenge-icon">💌</span>
       <div class="challenge-title">Trimite-mi un Mesaj Vocal de Dragoste</div>
@@ -460,7 +460,7 @@
       </div>
     </div>
 
-    <div class="challenge-card" data-pts="30" onclick="toggle(this)">
+    <div class="challenge-card" data-pts="15" onclick="toggle(this)">
       <div class="done-stamp">✅</div>
       <span class="challenge-icon">⛩️</span>
       <div class="challenge-title">Poartă Chinezească</div>
@@ -482,7 +482,7 @@
       </div>
     </div>
 
-    <div class="challenge-card" data-pts="30" onclick="toggle(this)">
+    <div class="challenge-card" data-pts="15" onclick="toggle(this)">
       <div class="done-stamp">✅</div>
       <span class="challenge-icon">🥢</span>
       <div class="challenge-title">Mâncărică Nouă</div>
@@ -493,7 +493,7 @@
       </div>
     </div>
 
-      <div class="challenge-card" data-pts="30" onclick="toggle(this)">
+      <div class="challenge-card" data-pts="15" onclick="toggle(this)">
         <div class="done-stamp">✅</div>
         <span class="challenge-icon">🎱</span>
         <div class="challenge-title">Simbol Norocos</div>
@@ -503,7 +503,7 @@
           <button class="check-btn">✓</button>
         </div>
       </div>
-      <div class="challenge-card" data-pts="30" onclick="toggle(this)">
+      <div class="challenge-card" data-pts="20" onclick="toggle(this)">
         <div class="done-stamp">✅</div>
         <span class="challenge-icon">🔍🈶</span>
         <div class="challenge-title">Descifrează Bannerele</div>
@@ -541,7 +541,7 @@
   const stateRef = firebase.database().ref('challenges');
 
   const REWARD_THRESHOLD = 7;
-  const MAX_PTS = 280;
+  const MAX_PTS = 250;
 
   // Listen for real-time changes from Firebase and update UI
   stateRef.on('value', (snapshot) => {
