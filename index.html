@@ -340,7 +340,7 @@
       <h1>Aventura Ta în China <span class="heart">❤</span></h1>
       <div class="subtitle">Completează provocările și trimite-mi dovada — te urmăresc de departe!</div>
     </header>
-    <div class="couplet">福星高照</div>
+    <div class="couplet">我爱你</div>
   </div>
 
   <div class="instructions">
@@ -513,6 +513,16 @@
           <button class="check-btn">✓</button>
         </div>
       </div>
+      <div class="challenge-card" data-pts="20" onclick="toggle(this)">
+        <div class="done-stamp">✅</div>
+        <span class="challenge-icon">🔥</span>
+        <div class="challenge-title">Love nest</div>
+        <div class="challenge-desc">Trimite-mi o poză cu locul perfect în care ai vrea sa ne iubim</div>
+        <div class="challenge-footer">
+          <span class="challenge-points">20 pts</span>
+          <button class="check-btn">✓</button>
+        </div>
+      </div>
 
   </div>
 
@@ -540,8 +550,8 @@
   firebase.initializeApp(firebaseConfig);
   const stateRef = firebase.database().ref('challenges');
 
-  const REWARD_THRESHOLD = 7;
-  const MAX_PTS = 250;
+  const REWARD_THRESHOLD = 8;
+  const MAX_PTS = 270;
 
   // Listen for real-time changes from Firebase and update UI
   stateRef.on('value', (snapshot) => {
