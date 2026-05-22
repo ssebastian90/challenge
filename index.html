@@ -479,13 +479,43 @@
 
 </div>
 
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
+
 <script>
+  // ▼▼▼ PASTE YOUR FIREBASE CONFIG HERE ▼▼▼
+  const firebaseConfig = {
+    apiKey: "AIzaSyArC3RA_3ZTXDDT4p2_7tGu1rE3pX1tgi0",
+    authDomain: "challenge-aea6c.firebaseapp.com",
+    databaseURL: "https://challenge-aea6c-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "challenge-aea6c",
+    storageBucket: "challenge-aea6c.firebasestorage.app",
+    messagingSenderId: "381394578855",
+    appId: "1:381394578855:web:36ffda3d9b1e7775abda82"
+  };
+  // ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+
+  firebase.initializeApp(firebaseConfig);
+  const stateRef = firebase.database().ref('challenges');
+
   const REWARD_THRESHOLD = 7;
-  const MAX_PTS = 210;
+  const MAX_PTS = 260;
+
+  // Listen for real-time changes from Firebase and update UI
+  stateRef.on('value', (snapshot) => {
+    const state = snapshot.val() || {};
+    document.querySelectorAll('.challenge-card').forEach((card, i) => {
+      card.classList.toggle('done', !!state[i]);
+    });
+    updateScore();
+  });
 
   function toggle(card) {
-    card.classList.toggle('done');
-    updateScore();
+    const cards = Array.from(document.querySelectorAll('.challenge-card'));
+    const index = cards.indexOf(card);
+    const isDone = !card.classList.contains('done');
+    stateRef.child(index).set(isDone);
   }
 
   function updateScore() {
@@ -507,8 +537,6 @@
       document.getElementById('rewardHint').textContent = `Mai completează ${remaining} provocări ${remaining > 1 ? '' : ''} pentru a-ți debloca recompensa 🎁`;
     }
   }
-
-  updateScore();
 </script>
 </body>
 </html>
