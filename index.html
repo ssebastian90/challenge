@@ -503,6 +503,16 @@
           <button class="check-btn">✓</button>
         </div>
       </div>
+      <div class="challenge-card" data-pts="30" onclick="toggle(this)">
+        <div class="done-stamp">✅</div>
+        <span class="challenge-icon">🔍🈶</span>
+        <div class="challenge-title">Descifrează Bannerele</div>
+        <div class="challenge-desc">Descifrează ce scrie pe bannerele de la inceputul paginii 🚩 </div>
+        <div class="challenge-footer">
+          <span class="challenge-points">20 pts</span>
+          <button class="check-btn">✓</button>
+        </div>
+      </div>
 
   </div>
 
@@ -531,7 +541,7 @@
   const stateRef = firebase.database().ref('challenges');
 
   const REWARD_THRESHOLD = 7;
-  const MAX_PTS = 260;
+  const MAX_PTS = 280;
 
   // Listen for real-time changes from Firebase and update UI
   stateRef.on('value', (snapshot) => {
